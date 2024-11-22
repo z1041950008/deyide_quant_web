@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">布林带策略股票信号 ({{ stocks[0].date.strftime('%Y-%m-%d') if stocks }})</h2>
+    
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>股票代码</th>
+                        <th>股票名称</th>
+                        <th>收盘价</th>
+                        <th>布林上轨</th>
+                        <th>布林中轨</th>
+                        <th>布林下轨</th>
+                        <th>得分</th>
+                        <th>信号</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stock in stocks %}
+                    <tr>
+                        <td>{{ stock.code }}</td>
+                        <td>{{ stock.name }}</td>
+                        <td>{{ "%.2f"|format(stock.close) }}</td>
+                        <td>{{ "%.2f"|format(stock.upper) }}</td>
+                        <td>{{ "%.2f"|format(stock.middle) }}</td>
+                        <td>{{ "%.2f"|format(stock.lower) }}</td>
+                        <td>{{ "%.2f"|format(stock.score) }}</td>
+                        <td>
+                            <span class="badge {% if stock.signal == 'buy' %}bg-success{% else %}bg-danger{% endif %}">
+                                {{ '买入' if stock.signal == 'buy' else '卖出' }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %} 

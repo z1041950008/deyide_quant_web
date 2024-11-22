@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">布林带策略历史信号</h2>
+    
+    <div class="card">
+        <div class="card-body">
+            <!-- 日期筛选 -->
+            <div class="row mb-3">
+                <div class="col">
+                    <form class="form-inline">
+                        <div class="input-group">
+                            <input type="date" class="form-control" name="start_date">
+                            <span class="input-group-text">至</span>
+                            <input type="date" class="form-control" name="end_date">
+                            <button type="submit" class="btn btn-primary">查询</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>股票代码</th>
+                        <th>股票名称</th>
+                        <th>收盘价</th>
+                        <th>信号</th>
+                        <th>得分</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for signal in signals %}
+                    <tr>
+                        <td>{{ signal.date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ signal.code }}</td>
+                        <td>{{ signal.name }}</td>
+                        <td>{{ "%.2f"|format(signal.close) }}</td>
+                        <td>
+                            <span class="badge {% if signal.signal == 'buy' %}bg-success{% else %}bg-danger{% endif %}">
+                                {{ '买入' if signal.signal == 'buy' else '卖出' }}
+                            </span>
+                        </td>
+                        <td>{{ "%.2f"|format(signal.score) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">布林带策略绩效统计</h2>
+    
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">信号总数</h5>
+                    <p class="card-text h3">{{ performance.total_signals }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">买入信号</h5>
+                    <p class="card-text h3 text-success">{{ performance.buy_signals }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">卖出信号</h5>
+                    <p class="card-text h3 text-danger">{{ performance.sell_signals }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">平均得分</h5>
+                    <p class="card-text h3">{{ "%.2f"|format(performance.avg_score) }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 这里可以添加更多的图表展示 -->
+</div>
+{% endblock %} 
